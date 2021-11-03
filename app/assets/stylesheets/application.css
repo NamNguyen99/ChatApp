@@ -11,5 +11,51 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require rails_emoji_picker
  *= require_self
  */
+
+
+ul {
+  padding-left: 0px;
+  list-style: none;
+}
+.messages-list {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 14px auto;
+  display: flex;
+  flex-direction: column;
+}
+p {
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: 5px 10px;
+  max-width: 70%;
+  width: max-content;
+  display: flex;
+}
+.message-received {
+  background-color: #F1F0F0;
+  border-color: #EEEEEE;
+  border-bottom-right-radius: 10px;
+  /* border-bottom-left-radius: 10px;
+  background-color: #2825ff;
+  border-color: #2825ff;
+  color: #fff; */
+}
+
+.message-sent {
+  border-bottom-left-radius: 10px;
+  background-color: #2825ff;
+  border-color: #2825ff;
+  color: #fff;
+  align-self: flex-end;
+}
+.message {
+  resize: none;
+  width: 100%;
+}
+

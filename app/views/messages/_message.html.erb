@@ -1,0 +1,4 @@
+<p class="<%= user.id == message.user_id ? 'message-sent' : 'message-received' %>">
+  <%= content_with_emoji(message.body) %>
+</p>
+
