@@ -18,7 +18,18 @@ class ConversationsController < ApplicationController
     end
   end
 
+  def add_member
+    @conversation = Conversation.find(params[:id])
+    @users = User.all.where.not(id: @conversation.get_member_ids)
+    @conversation.assign_attribute(conversation_params)
+    @conversation.save
+  end
+
   private
+
+  def conversation_params
+    params.require(:conversation).permit(group_conversations_attributes: [])
+  end
 
   def add_to_conversations
     session[:conversations] ||= []

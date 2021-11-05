@@ -3,7 +3,6 @@ import consumer from "./consumer"
 const chatRoomChannel = consumer.subscriptions.create("ChatRoomChannel", {
   connected() {
     console.log("Connected to the chat room!");
-    $("#modal").css('display', 'flex');
   },
 
   disconnected() {
