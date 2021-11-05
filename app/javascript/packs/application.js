@@ -17,7 +17,7 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-(function() {
+$(document).on("turbolinks:load", function() {
   $(document).on('click', '.toggle-window', function(e) {
     e.preventDefault();
     var panel = $(this).parent().parent();
@@ -31,4 +31,4 @@ ActiveStorage.start()
       messages_list.scrollTop(height);
     }
   });
-})();
+});
