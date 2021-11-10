@@ -13,5 +13,18 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  resources :multi_conversations, only: [:create] do
+    member do
+      post :close
+      post :add_member
+    end
+
+    resources :messages, only: [:create] do 
+      collection do
+        post :upload_attachment
+      end
+    end
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

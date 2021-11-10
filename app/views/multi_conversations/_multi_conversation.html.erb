@@ -1,11 +1,15 @@
 <li>
-  <div class="panel panel-default" data-multi-conversation-id="<%= multi_conversation.id %>", style="padding: 20px; margin-bottom: 20px">
+  <div class="panel panel-default" data-multi-conversation-id="<%= multi_conversation.id %>", style="padding: 20px; margin-bottom: 20px; border: 2px solid black; ">
     <div class="panel-heading">
-      <%= link_to multi_conversation.opposed_user(user).email, '', class: 'toggle-window' %>
-      <%= link_to "x", close_multi_conversation_path(multi_conversation), class: "btn btn-default btn-xs pull-right", remote: true, method: :post %>
+      <%= link_to "Group #{multi_conversation.id}", '', class: 'toggle-window' %>
+      <ul>
+        <% User.all.where.not(id: multi_conversation.get_member_ids).each do |user| %>
+          <li><%= link_to user.email, add_member_multi_conversation_path(recipient_id: user.id, id: multi_conversation.id), id: "user-#{multi_conversation.id}", remote: true, method: :post %></li>
+        <% end %>
+      </ul>
     </div>
 
-    <div class="panel-body" style="">
+    <div class="panel-body" style="display: none">
       <div class="messages-list", id=<%= "multi-messages-list-#{multi_conversation.id}"%>>
         
         <%= render 'multi_conversations/multi_conversation_content', messages: multi_conversation.messages, user: user %>
@@ -13,8 +17,9 @@
       </div>
       <%= form_for [multi_conversation, multi_conversation.messages.new], class: "send_message", remote: true do |f| %>
         <%= f.hidden_field :user_id, value: user.id %>
-        <%= f.text_area :body, class: "message" %>
-        <%= f.submit "Send", class: "btn btn-success" %>
+        <%= f.text_field :body, class: "message form-control", autocomplete: 'off'  %>
+        <%= f.file_field :attachment %>
+        <%= f.submit "Send", class: "btn btn-success pull-right" %>
       <% end %>
     </div>
   </div>

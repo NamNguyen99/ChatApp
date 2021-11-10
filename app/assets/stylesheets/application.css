@@ -22,7 +22,7 @@ ul {
   list-style: none;
 }
 .messages-list {
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
   margin: 14px auto;
@@ -58,5 +58,5 @@ p {
 .message {
   resize: none;
   width: 100%;
+  margin-bottom: 20px;
 }
-

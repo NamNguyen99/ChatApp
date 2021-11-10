@@ -1,5 +1,5 @@
 var conversations = $('#multi-conversations-list');
-var conversation = conversations.find("[data-multi-conversation-id='" + "<%= @multi-conversation.id %>" + "']");
+var conversation = conversations.find("[data-multi-conversation-id='" + "<%= @multi_conversation.id %>" + "']");
 
 if (conversation.length !== 1) {
   conversations.append("<%= j(render 'multi_conversations/multi_conversation', multi_conversation: @multi_conversation, user: current_user) %>");

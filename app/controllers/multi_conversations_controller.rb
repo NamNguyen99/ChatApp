@@ -2,9 +2,9 @@ class MultiConversationsController < ApplicationController
   def create
     current_multi_conversation = MultiConversation.find_by(id: params[:id])
     @multi_conversation = current_multi_conversation || MultiConversation.create(sender: current_user)
-    add_to_conversations unless conversated?
+    add_to_multi_conversations unless conversated?
 
-    @multi_conversation.group_conversations.create(recipient_id: params[:recipient])
+    @multi_conversation.group_conversations.create(recipient_id: params[:recipient_id])
     
     respond_to do |format|
       format.js
@@ -22,9 +22,12 @@ class MultiConversationsController < ApplicationController
   end
 
   def add_member
-    @multi_conversation = Conversation.find(params[:id])
-    @users = User.all.where.not(id: @conversation.get_member_ids)
-    @multi_conversation.group_conversations.create(recipient_id: params[:recipient])
+    @multi_conversation = MultiConversation.find(params[:id])
+    @users = User.all.where.not(id: @multi_conversation.get_member_ids)
+    @multi_conversation.group_conversations.create(recipient_id: params[:recipient_id])
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

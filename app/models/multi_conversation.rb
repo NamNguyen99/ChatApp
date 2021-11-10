@@ -1,9 +1,7 @@
 class MultiConversation < ApplicationRecord
-  has_many :messages, dependent: :destroy
-  has_many :group_conversations
+  has_many :messages, as: :target, dependent: :destroy
+  has_many :group_conversations, foreign_key: "conversation_id", class_name: "GroupConversation"
   belongs_to :sender, foreign_key: :sender_id, class_name: 'User'
-
-  validates :sender_id, uniqueness: { scope: :recipient_id }
 
   accepts_nested_attributes_for :group_conversations, allow_destroy: true
 
@@ -27,8 +25,7 @@ class MultiConversation < ApplicationRecord
   def get_member_ids
     member_ids = []
     member_ids << self.sender_id
-    menber_ids << self.recipient_id
-    menber_ids.concat(self.group_conversations.pluck(:recipient_id))
-    menber_ids.compact.uniq
+    member_ids.concat(self.group_conversations.pluck(:recipient_id))
+    member_ids.compact.uniq
   end
 end
