@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_03_015707) do
+ActiveRecord::Schema.define(version: 2021_11_08_035634) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -58,14 +58,35 @@ ActiveRecord::Schema.define(version: 2021_11_03_015707) do
     t.index ["sender_id"], name: "index_conversations_on_sender_id"
   end
 
+  create_table "group_conversations", force: :cascade do |t|
+    t.integer "conversation_id"
+    t.integer "recipient_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_group_conversations_on_conversation_id"
+    t.index ["recipient_id", "conversation_id"], name: "index_group_conversations_on_recipient_id_and_conversation_id", unique: true
+    t.index ["recipient_id"], name: "index_group_conversations_on_recipient_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text "body"
     t.integer "user_id", null: false
-    t.integer "conversation_id", null: false
+    t.integer "conversation_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "target_type"
+    t.integer "target_id"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["target_type", "target_id"], name: "index_messages_on_target"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "multi_conversations", force: :cascade do |t|
+    t.integer "sender_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sender_id"], name: "index_multi_conversations_on_sender_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -13,6 +13,7 @@
  *= require_tree .
  *= require rails_emoji_picker
  *= require_self
+ *= require bootstrap
  */
 
 
@@ -21,7 +22,7 @@ ul {
   list-style: none;
 }
 .messages-list {
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
   margin: 14px auto;
@@ -57,5 +58,5 @@ p {
 .message {
   resize: none;
   width: 100%;
+  margin-bottom: 20px;
 }
-

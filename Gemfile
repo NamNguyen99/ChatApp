@@ -56,3 +56,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'bootstrap'
 gem 'rails_emoji_picker'
+# gem 'dynamoid'
+gem 'aws-sdk'
+gem "remove_bg"
+gem 'bootstrap-sass'
+gem 'gemoji'
