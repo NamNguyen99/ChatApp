@@ -17,7 +17,12 @@ const chatGroupChannel = consumer.subscriptions.create("ChatGroupChannel", {
         $(list_select).append(`<p class='${msg_class}'>` + data.message.body + '</p>')
       }
       for (let i = 0; i < data.file.length; i++) {
-        $(list_select).append(`<img src='${data.file[i]}' class='${msg_class}' width='300px'> `)
+        let type = data.file[i].split('.')[1]
+        if (type == "png" || type == "jpg" || type == "jpeg"){
+          $(list_select).append(`<img src='${data.file[i]}' class='${msg_class}' width='300px'> `)
+        } else {
+          $(list_select).append(`<a href='${data.file[i]}' class='${msg_class}' width='300px' style='padding: 10px; margin-bottom: 10px; width: fit-content'>${data.filename[i]}</a> `)
+        }
       }
 
       $(list_select).animate({ scrollTop: $(list_select).prop("scrollHeight")}, 1000);
