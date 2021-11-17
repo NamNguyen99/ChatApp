@@ -6,8 +6,8 @@
 
 <% message.attachments.each do |file| %>
   <% if %w(image/jpeg image/jpg image/png).include?(file.attachment.content_type) %>
-    <%= image_tag(url_for(file.attachment), width: '300px', class: user.id == message.user_id ? 'message-sent' : 'message-received', style: "margin-bottom: 10px") %>
+    <%= image_tag(url_for(file.attachment), width: '200px', class: user.id == message.user_id ? 'message-sent' : 'message-received', style: "margin-bottom: 10px; width: fit-content") %>
   <% else %>
-    <%= link_to file.attachment.blob.filename, url_for(file.attachment), class: user.id == message.user_id ? 'message-sent' : 'message-received', style: "padding: 10px; margin-bottom: 10px" %>
+    <%= link_to file.attachment.blob.filename, url_for(file.attachment), class: user.id == message.user_id ? 'message-sent' : 'message-received', style: "padding: 10px; margin-bottom: 10px; width: fit-content" %>
   <% end %>
 <% end %>

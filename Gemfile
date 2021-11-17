@@ -61,3 +61,6 @@ gem 'aws-sdk'
 gem "remove_bg"
 gem 'bootstrap-sass'
 gem 'gemoji'
+gem "recaptcha", require: "recaptcha/rails"
+gem 'pry'
+gem 'dotenv'
